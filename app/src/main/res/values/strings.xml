@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FoodOrderingProjectSqlLite</string>
+    <string name="text">text</string>
+    <string name="mytext">The lorem ipsum is a placeholder text.</string>
+    <string name="name">Name</string>
+    <string name="price">Price</string>
+    <string name="description">Description</string>
+    <string name="todo">TODO</string>
+</resources>
