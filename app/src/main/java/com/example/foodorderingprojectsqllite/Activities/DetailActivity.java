@@ -14,12 +14,15 @@ import com.example.foodorderingprojectsqllite.databinding.ActivityDetailBinding;
 public class DetailActivity extends AppCompatActivity {
 ActivityDetailBinding binding;
     DBHelper helper;
+    int myQuantity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        binding=ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
       final   DBHelper helper = new DBHelper(this);
+
 
         if (getIntent().getIntExtra("type",0)==1) {
 
@@ -33,6 +36,25 @@ ActivityDetailBinding binding;
             binding.tvorderPrices.setText(String.format("%d", price));
             binding.nameLbl.setText(name);
             binding.DetailDescription.setText(description);
+            binding.add.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myQuantity ++;
+                    binding.tvorderPrices.setText(String.format("%d", price*myQuantity));
+                    binding.quantity.setText(String.valueOf(myQuantity));
+
+                }
+            });
+            binding.sub.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    myQuantity --;
+                    binding.tvorderPrices.setText(String.format("%d", myQuantity * price));
+                    binding.quantity.setText(String.valueOf(myQuantity));
+
+
+                }
+            });
 
             binding.btnOrderNow.setOnClickListener(new View.OnClickListener() {
                 @Override

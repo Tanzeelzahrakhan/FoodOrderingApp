@@ -44,13 +44,14 @@
                 android:layout_marginEnd="20dp"
                 android:background="@color/orderButtonBackground"
                 >
-
-                <ImageView
+                <Button
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/plusicon"
-                    android:id="@+id/add"
+                    android:background="@drawable/minusicon"
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/sub"
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,13 +63,13 @@
                     android:textColor="@color/black"
                     android:layout_marginStart="5dp"
                     />
-                <ImageView
+                <Button
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/minusicon"
-                    android:layout_marginStart="5dp"
-                    android:id="@+id/sub"
+                    android:background="@drawable/plusicon"
+                    android:id="@+id/add"
                     />
+
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
