@@ -10,6 +10,8 @@ public class MainModel { int image;
         this.description = description;
     }
 
+
+
     public int getImage() {
         return image;
     }

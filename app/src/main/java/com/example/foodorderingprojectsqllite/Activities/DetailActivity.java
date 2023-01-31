@@ -19,13 +19,16 @@ ActivityDetailBinding binding;
         super.onCreate(savedInstanceState);
        binding=ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        DBHelper helper = new DBHelper(this);
+      final   DBHelper helper = new DBHelper(this);
 
         if (getIntent().getIntExtra("type",0)==1) {
+
+
             int image = getIntent().getIntExtra("img", 0);
             int price = Integer.parseInt(getIntent().getStringExtra("Price"));
             String name = getIntent().getStringExtra("Name");
             String description = getIntent().getStringExtra("description");
+
             binding.detailImage.setImageResource(image);
             binding.tvorderPrices.setText(String.format("%d", price));
             binding.nameLbl.setText(name);
@@ -46,15 +49,44 @@ ActivityDetailBinding binding;
                         Toast.makeText(DetailActivity.this, "Data Success", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(DetailActivity.this, "error", Toast.LENGTH_SHORT).show();}}});
-        }else {
-             int id=getIntent().getIntExtra("id",0);
-            Cursor cursor=helper.getOrderById(id);
+        }
+
+        else
+        {
+            int id = getIntent().getIntExtra("id",0);
+            Cursor cursor = helper.getOrderById(id);
+               int image=cursor.getInt(4);
+            binding.detailImage.setImageResource(image);
+
+            binding.tvorderPrices.setText(String.format("%d", cursor.getInt(3)));
+            binding.nameLbl.setText(cursor.getString(6));
+            binding.DetailDescription.setText(cursor.getString(5));
             binding.etName.setText(cursor.getString(1));
             binding.etPhone.setText(cursor.getString(2));
-            binding.tvorderPrices.setText(String.format("%d",3));
-            binding.detailImage.setImageResource(cursor.getInt(4));
-            binding.DetailDescription.setText(cursor.getString(5));
-            binding.nameLbl.setText(cursor.getString(6));
+            binding.btnOrderNow.setText("Update Now");
+            binding.btnOrderNow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+               boolean isUpdated= helper.UpdateOrder(
+                        binding.etName.getText().toString(),
+                        binding.etPhone.getText().toString(),
+                        Integer.parseInt(binding.tvorderPrices.getText().toString()),
+                        image,
+                        binding.DetailDescription.getText().toString(),
+                        binding.nameLbl.getText().toString(),
+                         1,
+                        id
+
+                );
+               if (isUpdated)
+                   Toast.makeText(DetailActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+               else Toast.makeText(DetailActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                }
+
+            });
+
+
+
         }
     }
 }
